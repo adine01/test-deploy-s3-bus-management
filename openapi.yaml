@@ -1,0 +1,539 @@
+openapi: 3.0.0
+info:
+  title: Bus Management Service API
+  description: Microservice for managing buses and staff in a transportation system
+  version: 1.0.0
+  contact:
+    name: Bus Management Service
+    email: support@busmgmt.com
+
+servers:
+  - url: http://localhost:8081
+    description: Local development server
+  - url: https://bus-management-service.choreo.dev
+    description: Choreo production server
+
+paths:
+  /health:
+    get:
+      tags:
+        - Health
+      summary: Health check endpoint
+      description: Returns the health status of the service
+      operationId: getHealth
+      responses:
+        '200':
+          description: Service is healthy
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: string
+                    example: ok
+                  service:
+                    type: string
+                    example: bus-management
+
+  /api/buses:
+    get:
+      tags:
+        - Buses
+      summary: Get all buses
+      description: Retrieve a list of all buses in the system
+      operationId: getBuses
+      responses:
+        '200':
+          description: List of buses retrieved successfully
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Bus'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
+    post:
+      tags:
+        - Buses
+      summary: Create a new bus
+      description: Add a new bus to the system
+      operationId: createBus
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateBusRequest'
+      responses:
+        '201':
+          description: Bus created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Bus'
+        '400':
+          description: Invalid request data
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
+  /api/buses/{id}:
+    get:
+      tags:
+        - Buses
+      summary: Get bus by ID
+      description: Retrieve a specific bus by its ID
+      operationId: getBusById
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: Bus ID
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: Bus retrieved successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Bus'
+        '404':
+          description: Bus not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
+    put:
+      tags:
+        - Buses
+      summary: Update bus
+      description: Update an existing bus's information
+      operationId: updateBus
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: Bus ID
+          schema:
+            type: integer
+            format: int64
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateBusRequest'
+      responses:
+        '200':
+          description: Bus updated successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Bus'
+        '400':
+          description: Invalid request data
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: Bus not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
+    delete:
+      tags:
+        - Buses
+      summary: Delete bus
+      description: Remove a bus from the system
+      operationId: deleteBus
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: Bus ID
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: Bus deleted successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: Bus deleted successfully
+        '404':
+          description: Bus not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
+  /api/staff:
+    get:
+      tags:
+        - Staff
+      summary: Get all staff
+      description: Retrieve a list of all staff members in the system
+      operationId: getStaff
+      responses:
+        '200':
+          description: List of staff retrieved successfully
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Staff'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
+    post:
+      tags:
+        - Staff
+      summary: Create a new staff member
+      description: Add a new staff member to the system
+      operationId: createStaff
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateStaffRequest'
+      responses:
+        '201':
+          description: Staff member created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Staff'
+        '400':
+          description: Invalid request data
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
+  /api/staff/{id}:
+    get:
+      tags:
+        - Staff
+      summary: Get staff member by ID
+      description: Retrieve a specific staff member by their ID
+      operationId: getStaffById
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: Staff member ID
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: Staff member retrieved successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Staff'
+        '404':
+          description: Staff member not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
+    put:
+      tags:
+        - Staff
+      summary: Update staff member
+      description: Update an existing staff member's information
+      operationId: updateStaff
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: Staff member ID
+          schema:
+            type: integer
+            format: int64
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateStaffRequest'
+      responses:
+        '200':
+          description: Staff member updated successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Staff'
+        '400':
+          description: Invalid request data
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: Staff member not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
+    delete:
+      tags:
+        - Staff
+      summary: Delete staff member
+      description: Remove a staff member from the system
+      operationId: deleteStaff
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: Staff member ID
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: Staff member deleted successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                    example: Staff member deleted successfully
+        '404':
+          description: Staff member not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
+components:
+  schemas:
+    Bus:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          description: Unique identifier for the bus
+          example: 1
+        plate_number:
+          type: string
+          description: Vehicle registration plate number
+          example: "ABC-1234"
+        model:
+          type: string
+          description: Bus model and make
+          example: "Mercedes Sprinter"
+        capacity:
+          type: integer
+          description: Maximum passenger capacity
+          example: 50
+        status:
+          type: string
+          enum: [active, maintenance, retired]
+          description: Current status of the bus
+          example: "active"
+        created_at:
+          type: string
+          format: date-time
+          description: Creation timestamp
+          example: "2025-09-21T10:30:00Z"
+        updated_at:
+          type: string
+          format: date-time
+          description: Last update timestamp
+          example: "2025-09-21T10:30:00Z"
+
+    CreateBusRequest:
+      type: object
+      required:
+        - plate_number
+        - model
+        - capacity
+      properties:
+        plate_number:
+          type: string
+          description: Vehicle registration plate number
+          example: "ABC-1234"
+        model:
+          type: string
+          description: Bus model and make
+          example: "Mercedes Sprinter"
+        capacity:
+          type: integer
+          minimum: 1
+          description: Maximum passenger capacity
+          example: 50
+
+    Staff:
+      type: object
+      properties:
+        id:
+          type: integer
+          format: int64
+          description: Unique identifier for the staff member
+          example: 1
+        name:
+          type: string
+          description: Full name of the staff member
+          example: "John Doe"
+        email:
+          type: string
+          format: email
+          description: Email address
+          example: "john.doe@company.com"
+        phone:
+          type: string
+          description: Phone number
+          example: "+1234567890"
+        position:
+          type: string
+          enum: [driver, conductor, mechanic, supervisor]
+          description: Job position
+          example: "driver"
+        license_no:
+          type: string
+          description: Professional license number (optional)
+          example: "DL123456"
+        status:
+          type: string
+          enum: [active, inactive]
+          description: Employment status
+          example: "active"
+        created_at:
+          type: string
+          format: date-time
+          description: Creation timestamp
+          example: "2025-09-21T10:30:00Z"
+        updated_at:
+          type: string
+          format: date-time
+          description: Last update timestamp
+          example: "2025-09-21T10:30:00Z"
+
+    CreateStaffRequest:
+      type: object
+      required:
+        - name
+        - email
+        - phone
+        - position
+      properties:
+        name:
+          type: string
+          description: Full name of the staff member
+          example: "John Doe"
+        email:
+          type: string
+          format: email
+          description: Email address
+          example: "john.doe@company.com"
+        phone:
+          type: string
+          description: Phone number
+          example: "+1234567890"
+        position:
+          type: string
+          enum: [driver, conductor, mechanic, supervisor]
+          description: Job position
+          example: "driver"
+        license_no:
+          type: string
+          description: Professional license number (optional)
+          example: "DL123456"
+
+    Error:
+      type: object
+      properties:
+        error:
+          type: string
+          description: Error message
+          example: "Invalid request data"
+
+tags:
+  - name: Health
+    description: Service health monitoring
+  - name: Buses
+    description: Bus management operations
+  - name: Staff
+    description: Staff management operations
+
+security: []
