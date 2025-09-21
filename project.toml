@@ -2,8 +2,8 @@
 schema-version = "0.2"
 
 [io.buildpacks.build.env]
-GOOGLE_GO_VERSION = "1.23"
 GO111MODULE = "on"
+GOOGLE_GO_VERSION = "1.23"
 GOPROXY = "https://proxy.golang.org"
 
 [[io.buildpacks.group]]
