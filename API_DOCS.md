@@ -14,9 +14,11 @@ A microservice for managing buses and staff in a transportation system built wit
 ## API Endpoints
 
 ### Health
+
 - `GET /health` - Service health check
 
 ### Buses
+
 - `GET /api/buses` - Get all buses
 - `POST /api/buses` - Create a new bus
 - `GET /api/buses/{id}` - Get bus by ID
@@ -24,6 +26,7 @@ A microservice for managing buses and staff in a transportation system built wit
 - `DELETE /api/buses/{id}` - Delete bus
 
 ### Staff
+
 - `GET /api/staff` - Get all staff
 - `POST /api/staff` - Create a new staff member
 - `GET /api/staff/{id}` - Get staff member by ID
@@ -33,10 +36,12 @@ A microservice for managing buses and staff in a transportation system built wit
 ## Data Models
 
 ### Bus
+
 - ID, Plate Number, Model, Capacity, Status (active/maintenance/retired)
 - Timestamps: created_at, updated_at
 
 ### Staff
+
 - ID, Name, Email, Phone, Position (driver/conductor/mechanic/supervisor)
 - License Number (optional), Status (active/inactive)
 - Timestamps: created_at, updated_at
@@ -54,6 +59,7 @@ The complete API documentation is available in `openapi.yaml` following OpenAPI 
 ## Choreo Deployment
 
 This service is configured for deployment on WSO2 Choreo platform:
+
 - Endpoint configuration: `.choreo/endpoints.yaml`
 - OpenAPI specification: `openapi.yaml`
 - Docker support: `Dockerfile`

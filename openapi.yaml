@@ -22,7 +22,7 @@ paths:
       description: Returns the health status of the service
       operationId: getHealth
       responses:
-        '200':
+        "200":
           description: Service is healthy
           content:
             application/json:
@@ -44,20 +44,20 @@ paths:
       description: Retrieve a list of all buses in the system
       operationId: getBuses
       responses:
-        '200':
+        "200":
           description: List of buses retrieved successfully
           content:
             application/json:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/Bus'
-        '500':
+                  $ref: "#/components/schemas/Bus"
+        "500":
           description: Internal server error
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error'
+                $ref: "#/components/schemas/Error"
 
     post:
       tags:
@@ -70,26 +70,26 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/CreateBusRequest'
+              $ref: "#/components/schemas/CreateBusRequest"
       responses:
-        '201':
+        "201":
           description: Bus created successfully
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Bus'
-        '400':
+                $ref: "#/components/schemas/Bus"
+        "400":
           description: Invalid request data
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error'
-        '500':
+                $ref: "#/components/schemas/Error"
+        "500":
           description: Internal server error
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error'
+                $ref: "#/components/schemas/Error"
 
   /api/buses/{id}:
     get:
@@ -107,24 +107,24 @@ paths:
             type: integer
             format: int64
       responses:
-        '200':
+        "200":
           description: Bus retrieved successfully
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Bus'
-        '404':
+                $ref: "#/components/schemas/Bus"
+        "404":
           description: Bus not found
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error'
-        '500':
+                $ref: "#/components/schemas/Error"
+        "500":
           description: Internal server error
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error'
+                $ref: "#/components/schemas/Error"
 
     put:
       tags:
@@ -145,32 +145,32 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/CreateBusRequest'
+              $ref: "#/components/schemas/CreateBusRequest"
       responses:
-        '200':
+        "200":
           description: Bus updated successfully
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Bus'
-        '400':
+                $ref: "#/components/schemas/Bus"
+        "400":
           description: Invalid request data
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error'
-        '404':
+                $ref: "#/components/schemas/Error"
+        "404":
           description: Bus not found
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error'
-        '500':
+                $ref: "#/components/schemas/Error"
+        "500":
           description: Internal server error
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error'
+                $ref: "#/components/schemas/Error"
 
     delete:
       tags:
@@ -187,7 +187,7 @@ paths:
             type: integer
             format: int64
       responses:
-        '200':
+        "200":
           description: Bus deleted successfully
           content:
             application/json:
@@ -197,18 +197,18 @@ paths:
                   message:
                     type: string
                     example: Bus deleted successfully
-        '404':
+        "404":
           description: Bus not found
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error'
-        '500':
+                $ref: "#/components/schemas/Error"
+        "500":
           description: Internal server error
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error'
+                $ref: "#/components/schemas/Error"
 
   /api/staff:
     get:
@@ -218,20 +218,20 @@ paths:
       description: Retrieve a list of all staff members in the system
       operationId: getStaff
       responses:
-        '200':
+        "200":
           description: List of staff retrieved successfully
           content:
             application/json:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/Staff'
-        '500':
+                  $ref: "#/components/schemas/Staff"
+        "500":
           description: Internal server error
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error'
+                $ref: "#/components/schemas/Error"
 
     post:
       tags:
@@ -244,26 +244,26 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/CreateStaffRequest'
+              $ref: "#/components/schemas/CreateStaffRequest"
       responses:
-        '201':
+        "201":
           description: Staff member created successfully
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Staff'
-        '400':
+                $ref: "#/components/schemas/Staff"
+        "400":
           description: Invalid request data
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error'
-        '500':
+                $ref: "#/components/schemas/Error"
+        "500":
           description: Internal server error
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error'
+                $ref: "#/components/schemas/Error"
 
   /api/staff/{id}:
     get:
@@ -281,24 +281,24 @@ paths:
             type: integer
             format: int64
       responses:
-        '200':
+        "200":
           description: Staff member retrieved successfully
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Staff'
-        '404':
+                $ref: "#/components/schemas/Staff"
+        "404":
           description: Staff member not found
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error'
-        '500':
+                $ref: "#/components/schemas/Error"
+        "500":
           description: Internal server error
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error'
+                $ref: "#/components/schemas/Error"
 
     put:
       tags:
@@ -319,32 +319,32 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/CreateStaffRequest'
+              $ref: "#/components/schemas/CreateStaffRequest"
       responses:
-        '200':
+        "200":
           description: Staff member updated successfully
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Staff'
-        '400':
+                $ref: "#/components/schemas/Staff"
+        "400":
           description: Invalid request data
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error'
-        '404':
+                $ref: "#/components/schemas/Error"
+        "404":
           description: Staff member not found
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error'
-        '500':
+                $ref: "#/components/schemas/Error"
+        "500":
           description: Internal server error
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error'
+                $ref: "#/components/schemas/Error"
 
     delete:
       tags:
@@ -361,7 +361,7 @@ paths:
             type: integer
             format: int64
       responses:
-        '200':
+        "200":
           description: Staff member deleted successfully
           content:
             application/json:
@@ -371,18 +371,18 @@ paths:
                   message:
                     type: string
                     example: Staff member deleted successfully
-        '404':
+        "404":
           description: Staff member not found
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error'
-        '500':
+                $ref: "#/components/schemas/Error"
+        "500":
           description: Internal server error
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Error'
+                $ref: "#/components/schemas/Error"
 
 components:
   schemas:
