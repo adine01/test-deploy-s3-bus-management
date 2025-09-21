@@ -1,11 +1,12 @@
-version: 0.1
+schemaVersion: "1.2"
 endpoints:
-  - name: bus-management-service-c5d
-    displayName: bus-management-service
-    type: REST
-    port: 8081
-    context: /
-    networkVisibilities:
-      - Project
-      - Public
-    schemaFilePath: openapi.yaml
+    - name: bus-management-service-c5d
+      displayName: bus-management-service
+      service:
+        basePath: /
+        port: 8081
+      type: REST
+      networkVisibilities:
+        - Project
+        - Public
+      schemaFilePath: openapi.yaml
