@@ -1,0 +1,9 @@
+# Choreo Endpoints Configuration for Bus Management Service
+version: 0.1
+endpoints:
+  - name: "bus-management-service"
+    type: "REST"
+    networkVisibility: "Public"
+    context: "/"
+    port: 8081
+    schemaFilePath: "openapi.yaml"
