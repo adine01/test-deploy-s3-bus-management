@@ -24,18 +24,19 @@ RUN go build -a -installsuffix cgo -o main .
 # Runtime stage
 FROM alpine:latest
 
-RUN apk --no-cache add ca-certificates tzdata
+RUN apk --no-cache add ca-certificates tzdata wget
 
-WORKDIR /root/
+WORKDIR /app
 
 # Copy the binary from builder stage
 COPY --from=builder /app/main .
 
-# Create non-root user
-RUN addgroup -g 1001 -S appgroup && \
-    adduser -u 1001 -S appuser -G appgroup
+# Create non-root user with UID in Choreo-compliant range (10000-20000)
+RUN addgroup -g 10001 -S appgroup && \
+    adduser -u 10001 -S appuser -G appgroup && \
+    chown -R appuser:appgroup /app
 
-USER appuser
+USER 10001
 
 # Expose port
 EXPOSE 8081
